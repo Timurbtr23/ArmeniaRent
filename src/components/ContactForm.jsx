@@ -29,7 +29,15 @@ export default function ContactForm() {
           <div>
             <form
               data-form-id="contact"
-              onSubmit={(e) => { e.preventDefault(); setShowToast(true) }}
+              onSubmit={async (e) => {
+                e.preventDefault()
+                await fetch('/api/send-booking', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, phone, message: e.target.message?.value })
+                })
+                setShowToast(true)
+              }}
               className="relative flex flex-col gap-5 bg-zinc-900/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10 shadow-[0_0_40px_rgba(6,182,212,0.05)]"
             >
               <div>

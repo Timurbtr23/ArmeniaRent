@@ -13,8 +13,13 @@ export default function BookingModal({ car, onClose, onSuccess }) {
   const carName = `${car.make} ${car.model}${car.year ? ` ${car.year}` : ''}`
   const canSubmit = privacyChecked && name.trim() && phone.trim()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    await fetch('/api/send-booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, car: carName, message: e.target.message?.value })
+    })
     onClose()
     onSuccess()
   }
