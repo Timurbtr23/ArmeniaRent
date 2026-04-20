@@ -26,7 +26,7 @@ export default function ContactForm() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
-          <div>
+          <div className="order-2 lg:order-1">
             <form
               data-form-id="contact"
               onSubmit={async (e) => {
@@ -106,7 +106,7 @@ export default function ContactForm() {
               <p className="text-sm text-zinc-500 text-center">Не просим предоплату. Расчёт и фото авто — бесплатно.</p>
             </form>
           </div>
-          <div className="flex flex-col gap-8 justify-center">
+          <div className="flex flex-col gap-8 justify-center order-1 lg:order-2">
             <div>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-zinc-50 leading-tight">
                 Получите расчёт и фото авто на ваши даты — за 15 минут в мессенджер

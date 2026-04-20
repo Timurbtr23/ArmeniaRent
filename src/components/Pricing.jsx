@@ -322,6 +322,7 @@ const cars = rawCars.map(c => ({
 
 function CarCard({ car, activePeriod, displayCurrency, onBook }) {
   const [imgIndex, setImgIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
 
   const prevImg = (e) => {
     e.stopPropagation();
@@ -331,6 +332,16 @@ function CarCard({ car, activePeriod, displayCurrency, onBook }) {
   const nextImg = (e) => {
     e.stopPropagation();
     setImgIndex((prev) => (prev === car.images.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEnd = e.changedTouches[0].clientX;
+    if (touchStart - touchEnd > 50) nextImg(e); // свайп влево
+    if (touchEnd - touchStart > 50) prevImg(e); // свайп вправо
   };
 
   const rawVal = car.rawPrices ? car.rawPrices[activePeriod] : null;
@@ -344,27 +355,28 @@ function CarCard({ car, activePeriod, displayCurrency, onBook }) {
         : 'border border-zinc-700/50 hover:border-accent-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]'
         }`}
     >
-      <div className="relative h-48 sm:h-56 bg-zinc-900 shrink-0 group">
+      <div className="relative h-48 sm:h-56 bg-zinc-900 shrink-0 group" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <img
           src={car.images[imgIndex]}
           alt={`${car.make} ${car.model}`}
-          className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100"
+          className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100 cursor-grab active:cursor-grabbing"
           loading="lazy"
           decoding="async"
+          draggable={false}
         />
 
         {car.images.length > 1 && (
           <>
             <button
               onClick={prevImg}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer z-10"
+              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer z-10"
               aria-label="Предыдущее фото"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextImg}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer z-10"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer z-10"
               aria-label="Следующее фото"
             >
               <ChevronRight size={20} />

@@ -33,7 +33,7 @@ export default function Hero() {
         <img
           src="/images/hero.jpg"
           alt="Горная дорога Армении"
-          className="absolute inset-0 w-full h-[105%] object-cover opacity-90"
+          className="absolute inset-0 w-full h-[105%] object-cover object-right sm:object-center opacity-90"
           style={{ top: '-5%' }}
         />
       </div>
