@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import Main from './pages/Main'
+import Armenia from './pages/Armenia'
 
 const isSSR = typeof window === 'undefined'
 const Router = isSSR || (typeof __SANDBOX__ !== 'undefined' && __SANDBOX__) ? MemoryRouter : BrowserRouter
+
+export { isSSR }
 
 // @surgay-brand-logo
 const BRAND_LOGO_URL = '{BRAND_LOGO_URL}' !== 'null' ? '{BRAND_LOGO_URL}' : null;
@@ -72,13 +75,14 @@ function Nav({ brandLogoUrl }) {
   )
 }
 
-export default function App() {
+export default function App({ initialUrl = '/' }) {
   return (
-    <Router>
+    <Router initialEntries={isSSR ? [initialUrl] : undefined}>
       <Nav brandLogoUrl={BRAND_LOGO_URL} />
       <main className="min-h-screen bg-zinc-950">
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/armenia" element={<Armenia />} />
         </Routes>
       </main>
     </Router>

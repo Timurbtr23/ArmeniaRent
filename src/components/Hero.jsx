@@ -13,7 +13,7 @@ const bullets = [
   { icon: DollarSign, text: 'Оплата в любой валюте: драмы, рубли, доллар, евро, крипта' },
 ]
 
-export default function Hero() {
+export default function Hero({ heading = 'Аренда авто в Ереване без залога, скрытых платежей и проблем при возврате' }) {
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Hero() {
               Прокат автомобилей в Ереване и по Армении · 30+ авто · С 2017 года
             </p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-              Аренда авто в Ереване без залога, скрытых платежей и проблем при возврате
+              {heading}
             </h1>
             <p className="mt-5 text-base sm:text-lg text-white/80 max-w-xl leading-relaxed">
               Подберём автомобиль под ваши задачи и маршрут за 15 минут. Условия, страховку и фото конкретной машины пришлём в мессенджер — до вашего приезда.
