@@ -24,4 +24,7 @@
 /* Скрыть виджет Яндекс.Метрики */
 #ym-informer,
 .ym-badge,
-[id^="ym-"] iframe { display: none !important; }
+[id^="ym-"],
+a[href*="metrika.yandex"],
+a[href*="mc.yandex"],
+img[src*="mc.yandex.ru/watch"] { display: none !important; }
