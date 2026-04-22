@@ -20,3 +20,8 @@
   from { width: 100%; }
   to   { width: 0%; }
 }
+
+/* Скрыть виджет Яндекс.Метрики */
+#ym-informer,
+.ym-badge,
+[id^="ym-"] iframe { display: none !important; }
