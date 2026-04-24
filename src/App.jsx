@@ -3,6 +3,7 @@ import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import Main from './pages/Main'
 import Armenia from './pages/Armenia'
+import NotFound from './pages/NotFound'
 
 const isSSR = typeof window === 'undefined'
 const Router = isSSR || (typeof __SANDBOX__ !== 'undefined' && __SANDBOX__) ? MemoryRouter : BrowserRouter
@@ -83,6 +84,7 @@ export default function App({ initialUrl = '/' }) {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/armenia" element={<Armenia />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </Router>
